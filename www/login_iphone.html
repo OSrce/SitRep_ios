@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>SitRep1.0</title>
+
+<style>
+@import "lib/srd/css/login_iphone.css";
+</style>
+
+<script>
+dojoConfig = {
+  baseUrl: 'lib',
+	tlmSiblingOfDojo: true,
+	async: true,
+	parseOnLoad: false,
+  packages: [
+    'dojo',
+    'dijit',
+    'dojox',
+    'srd'
+  ]
+};
+
+</script>
+
+<script type="text/javascript" src="cordova-2.0.0.js" ></script>
+
+<script type="text/javascript" src="lib/srd/login_bootloader_iphone.js" ></script>
+
+
+<script type="text/javascript">
+
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+    
+    function onDeviceReady() {
+        // Now safe to use the PhoneGap API
+    
+require(['srd/Login_mobile', 'dojo/domReady!'], function(Login) {
+
+srdLogin = new Login();
+
+} );
+
+    }
+</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"></meta>
+</head>
+<body id="myapp">
+ <div data-dojo-type="dojox.mobile.View" id="root_view" style="height: 100%;" selected="selected">
+
+<h1 label="SitRep 1.0" data-dojo-type="dojox.mobile.Heading"></h1>
+  <fieldset style="border: 5px groove threedface; margin: 2px; padding: 0.75em;">
+  <legend>
+      Login</legend>
+<form action="javascript:srdLogin.connectToServer()" method="get">
+    <table style="width: 100;">
+   <tbody>
+       <tr>
+         <td>
+           <label id="selectserver" style="width: 20%;">
+             Select server:</label>
+         </td>
+         <td><div  id=serverListLocation1  style="display: block;"></div>
+ 
+         </td><td></td></tr>
+       <tr><td>
+<label>
+  Username:</label>
+        </td>
+         <td>
+<input type="text" id="userbox" data-dojo-type="dojox.mobile.TextBox"></input>
+        </td><td><div id="loginfeedback" style="color: red"></div>  </td></tr>
+       <tr>
+<td>
+<label>
+  Password:</label>
+        </td>
+<td>
+<input type="password" id="passbox" data-dojo-type="dojox.mobile.TextBox"></input>
+        </td>
+      </tr>
+       <tr>
+<td></td>
+<td>
+<button type="submit" data-dojo-type="dojox.mobile.Button">
+  Login</button>
+        </td> <td></td> </tr>
+     </tbody>
+   </table>
+   
+  
+   </form>
+    </fieldset>
+    
+    
+    <ul data-dojo-type="dojox.mobile.RoundRectList">
+    	<li data-dojo-type="dojox.mobile.ListItem" moveTo="server_view">Edit Servers</li>
+    	<li data-dojo-type="dojox.mobile.ListItem" moveTo="about_view">About</li>
+    </ul>
+    
+  </div>
+
+
+
+
+   <div data-dojo-type="dojox.mobile.View" id="about_view" style="height: 100%; display: none;">
+  	<h1 label="About" data-dojo-type="dojox.mobile.Heading" back="Home" moveTo="root_view"></h1>
+  			<label size=5>SITREP</label><br>
+		<label size=3>THE OPEN SOURCE SOLUTION FOR PUBLIC SAFETY</label>
+		<P>
+	SitRep came to be because of the lack of easy to use tools for collaborative work on spatial and temporal data sets used for planning purposes in public safety. Development naturally progressed into an operational tool for the management of assets, and monitoring of events and as an analytical tool for after-action-reports because of the void of any tools that fulfilled these needs in public safety.
+  
+  </div>
+  
+  
+     <!--##################################### main frame view ###################################-->
+ <div data-dojo-type="dojox.mobile.View" id="main_frame_view" style="height: 100%; display: none;">
+	</div> 
+ 
+  
+  
+  <!--##################################### server_view ###################################-->
+ <div data-dojo-type="dojox.mobile.ScrollableView" id="server_view" style="height: 100%; display: none;">
+<h1 label="Edit Servers" data-dojo-type="dojox.mobile.Heading" back="Home" moveTo="root_view">
+<div data-dojo-type="dojox.mobile.ToolBarButton" data-dojo-props="icon:'mblDomButtonWhitePlus', onClick: function(){srdLogin.addNewServer();}" style="float:right;"></div>
+
+</h1>
+<div id="serverviewhtml"></div>
+
+
+	    		<ul id="serverListLocation2">
+	    		</ul>
+
+
+	<ul data-dojo-type="dojox.mobile.TabBar" data-dojo-props='barType:"segmentedControl"' fixed="bottom" >
+ 		 <li label="Delete" id="deletebutton" data-dojo-type="dojox.mobile.TabBarButton" data-dojo-props="onClick:function(){srdLogin.deleteserverprep();}"></li>
+	</ul>
+ 
+
+
+	<!-- End of server_view-->
+</div>
+	
+	
+	
+	
+	
+	<!--############################# server_data_view ####################################-->	
+<div data-dojo-type="dojox.mobile.View" id="server_data_view" style="height: 100%; display: none;">
+
+<h1 label="Edit Server" back="Back" moveto="server_view" data-dojo-type="dojox.mobile.Heading"></h1>
+  <fieldset style="border: 5px groove threedface; margin: 2px; padding: 0.75em;">
+  <legend>
+      Edit</legend>
+<div id="editingserver">
+
+
+    <table style="width: 100;">
+   <tbody>
+       <tr>
+         <td>
+           <label style="width: 20%;">
+              Server:</label>
+         </td><td><input type="text" id="editservername" data-dojo-type="dojox.mobile.TextBox"></input>
+	</td><td></td></tr>
+	<tr>
+         <td><label>
+            City:</label></td><td><input type="text" id="editcity" data-dojo-type="dojox.mobile.TextBox"></input>
+        </td><td></td></tr>
+       <tr>
+         <td><label>
+            Username:</label></td><td><input type="text" id="editusername" data-dojo-type="dojox.mobile.TextBox"></input>
+        </td><td></td></tr>
+       <tr>
+         <td><label>Password:</label></td><td><input type="text" id="editpassword" data-dojo-type="dojox.mobile.TextBox"></input>
+        </td><td>
+        </td></tr>
+       <tr> <td></td><td>
+  				<button data-dojo-type="dojox.mobile.Button" id="savebutton" data-dojo-props="onClick:function(){srdLogin.saveserver();}">Save</button>
+           
+        </td><td></td> </tr>
+     </tbody>
+   </table>
+   
+   </div>
+
+
+</div>
+		
+ <div data-dojo-type="dojox.mobile.View" id="lax_view" style="height: 100%; display: none;"></div>
+  
+  
+ </body>
+</html>
+

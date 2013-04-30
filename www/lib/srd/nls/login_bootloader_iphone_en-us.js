@@ -1,0 +1,2 @@
+//>>built
+define("srd/nls/login_bootloader_iphone_en-us",{"dijit/nls/loading":{loadingState:"Loading...",errorState:"Sorry, an error occurred"},"dojox/form/nls/CheckedMultiSelect":{invalidMessage:"At least one item must be selected.",multiSelectLabelText:"{num} item(s) selected"},"dijit/nls/common":{buttonOk:"OK",buttonCancel:"Cancel",buttonSave:"Save",itemClose:"Close"},"dijit/form/nls/ComboBox":{previousMessage:"Previous choices",nextMessage:"More choices"}});

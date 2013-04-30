@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>SitRep1.0</title>
+        <style>
+			@import "lib/srd/css/srd.css";
+			@import "lib/OpenLayers/theme/default/style.css";
+            </style>
+        
+        <script type="text/javascript" src="cordova-2.0.0.js" ></script>
+        
+		<script>
+            
+            
+            
+			serverBaseUrl = parent.serverBaseUrl;
+			dojoConfig = {
+				baseUrl: serverBaseUrl+'/lib',
+				tlmSiblingOfDojo: true,
+				async: true,
+				parseOnLoad: false,
+                packages: [
+                           'dojo',
+                           'dijit',
+                           'dojox',
+                           'org',
+                           'srd'
+                           ],
+				cache: {}
+			};
+
+            </script>
+        <script type="text/javascript" src="lib/OpenLayers/OpenLayers.js"></script>
+		<script type="text/javascript"  src="lib/srd/dojo_bootloader.js"></script>
+        <script>
+       
+                require([
+                         "dojo/request",
+                         "srd/srd_document",
+                         "dojo/domReady!"
+                         ], function( request, srd_document ) {
+                        request.get(serverBaseUrl+"/home/index/userdata", {
+                                    handleAs: "json"
+                                    }).then(
+                                            function(data){
+                                            console.log("test2");
+                                            
+                                            data.serverBaseUrl = serverBaseUrl;
+                                            console.log("Creating srd: data="+data);
+                                            srd = srd_document( data );
+                                            console.log(" srd done being created, now calling init");
+                                            srd.srd_init();
+                                            console.log("srd init done!");
+                                            }, function(err){
+                                            // Handle the error condition
+                                            console.log("ERROR:" + err);
+                                            }, function(evt){
+                                            console.log("In Progress.");
+                                            }  );
+                        } );
+            
+            
+            </script>
+
+        
+        
+     	</head>
+ 	<body class="tundra" style="background-color:grey;" >
+		<div id="theSrdDoc" >
+			<div id="jsDisabled" >Loading. . .
+			</div>
+		</div>
+	</body>
+</html>
+
+
+
+
